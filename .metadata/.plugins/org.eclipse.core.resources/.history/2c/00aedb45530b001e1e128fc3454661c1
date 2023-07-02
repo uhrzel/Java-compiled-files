@@ -1,0 +1,118 @@
+import javax.swing.*;
+
+import Rosecalcu.Rosecalcu;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+public class GUIexample {
+    private JFrame mainFrame;
+    private JFrame secondaryFrame;
+    private roseZodiac zodiacFrame;
+
+    public GUIexample() {
+        // Create the main frame
+        mainFrame = new JFrame("Main Frame");
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setSize(500, 600);
+        mainFrame.setLayout(null);
+
+        // Load the background image
+        try {
+            BufferedImage backgroundImage = ImageIO.read(new File("bg.jpg"));
+            mainFrame.setContentPane(new JLabel(new ImageIcon(backgroundImage)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Create the start button
+        JButton startButton = new JButton("Start");
+        startButton.setBounds(200, 200, 100, 50);
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSecondaryFrame();
+            }
+        });
+        startButton.setOpaque(true);
+        startButton.setBackground(new Color(255, 255, 255, 128));
+
+        // Add the start button to the main frame
+        mainFrame.add(startButton);
+
+        // Display the main frame
+        mainFrame.setVisible(true);
+    }
+
+
+    private void showSecondaryFrame() {
+        // Create the secondary frame
+        secondaryFrame = new JFrame("Secondary Frame");
+        secondaryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        secondaryFrame.setSize(500, 600);
+        secondaryFrame.setLayout(new FlowLayout());
+
+        // Create the buttons 1 to 4
+        for (int i = 1; i <= 4; i++) {
+            JButton button = new JButton("Button " + i);
+            int finalI = i;
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (finalI == 1) {
+                        showZodiacFrame();
+                    } 
+                    if (finalI == 2) {
+                        showCalcFrame();
+                    }
+                    if (finalI == 3) {
+                        showroseFrame();
+                    }
+                    if (finalI == 4) {
+                        showroseCalcu();
+                    }
+                    else {
+                        // Handle other button actions if needed
+                    }
+                }
+            });
+            secondaryFrame.add(button);
+        }
+
+        // Display the secondary frame
+        secondaryFrame.setVisible(true);
+    }
+
+    private void showZodiacFrame() {
+        zodiacFrame = new roseZodiac();
+        zodiacFrame.setVisible(true);
+    }
+    private void showCalcFrame() {
+    	CurrencyCalculatorMain calculator = new CurrencyCalculatorMain();
+    	 calculator.createAndShowGUI();
+    }
+    
+    private void showroseFrame() {
+    	roseper window = new roseper();
+    }
+    private void showroseCalcu() {
+    	Rosecalcu window = new Rosecalcu();
+		window.frame.setVisible(true);
+    }
+    
+
+
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new GUIexample();
+            }
+        });
+    }
+}

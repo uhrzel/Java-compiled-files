@@ -1,0 +1,221 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CurrencyCalculatorGUI {
+    private JFrame frame;
+    private JComboBox<String> fromComboBox;
+    private JComboBox<String> toComboBox;
+    private JTextField amountField;
+    private JLabel resultLabel;
+
+    public void createAndShowGUI() {
+        // Create the frame
+        frame = new JFrame("Currency Calculator");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new FlowLayout());
+
+        // Create the currency selection panels
+        JPanel fromPanel = createCurrencySelectionPanel("From: ", fromComboBox = new JComboBox<>());
+        JPanel toPanel = createCurrencySelectionPanel("To: ", toComboBox = new JComboBox<>());
+
+        // Create the amount input panel
+        JPanel amountPanel = new JPanel(new FlowLayout());
+        amountPanel.add(new JLabel("Amount: "));
+        amountField = new JTextField(10);
+        amountPanel.add(amountField);
+
+        // Create the result panel
+        JPanel resultPanel = new JPanel(new FlowLayout());
+        resultLabel = new JLabel();
+        resultPanel.add(new JLabel("Result: "));
+        resultPanel.add(resultLabel);
+
+        // Create the convert button
+        JButton convertButton = new JButton("Convert");
+        convertButton.addActionListener(new ConvertButtonListener());
+
+        // Add all components to the frame
+        frame.getContentPane().add(fromPanel);
+        frame.getContentPane().add(toPanel);
+        frame.getContentPane().add(amountPanel);
+        frame.getContentPane().add(convertButton);
+        frame.getContentPane().add(resultPanel);
+
+        // Show the frame
+        frame.setVisible(true);
+    }
+
+    private JPanel createCurrencySelectionPanel(String label, JComboBox<String> comboBox) {
+        JPanel panel = new JPanel(new FlowLayout());
+        panel.add(new JLabel(label));
+        panel.add(comboBox);
+        comboBox.addItem("USD");
+        comboBox.addItem("EUR");
+        comboBox.addItem("GBP");
+        comboBox.addItem("JPY");
+        comboBox.addItem("PHP");
+        comboBox.addItem("INR");
+        comboBox.addItem("AED");
+        comboBox.addItem("KRW");
+        
+        
+        return panel;
+    }
+
+    private class ConvertButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Get selected currencies and amount
+            String fromCurrency = (String) fromComboBox.getSelectedItem();
+            String toCurrency = (String) toComboBox.getSelectedItem();
+            String amountText = amountField.getText();
+
+            // Validate the amount input
+            if (amountText.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Please enter an amount.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            double amount;
+            try {
+                amount = Double.parseDouble(amountText);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(frame, "Invalid amount format. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Perform the conversion
+            double result = convertCurrency(fromCurrency, toCurrency, amount);
+
+            // Update the result label
+            resultLabel.setText(String.format("%.2f %s", result, toCurrency));
+        }
+
+        private double convertCurrency(String fromCurrency, String toCurrency, double amount) {
+            // Perform the currency conversion logic here
+            // You'll need to implement your own conversion rates or use an API
+            // This is just a placeholder implementation
+            if (fromCurrency.equals("USD") && toCurrency.equals("EUR")) {
+                return amount * 0.85;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("GBP")) {
+                return amount * 0.72;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("JPY")) {
+                return amount * 110.05;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("PHP")) {
+                return amount * 50.32;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("AED")) {
+                return amount * 3.67;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("INR")) {
+                return amount * 75.10;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("KRW")) {
+                return amount * 1130.50;
+            } else if (fromCurrency.equals("EUR") && toCurrency.equals("USD")) {
+                return amount * 1.18;
+            } else if (fromCurrency.equals("EUR") && toCurrency.equals("GBP")) {
+                return amount * 0.85;
+            } else if (fromCurrency.equals("EUR") && toCurrency.equals("JPY")) {
+                return amount * 131.23;
+            } else if (fromCurrency.equals("EUR") && toCurrency.equals("PHP")) {
+                return amount * 59.22;
+            } else if (fromCurrency.equals("EUR") && toCurrency.equals("AED")) {
+                return amount * 4.26;
+            } else if (fromCurrency.equals("EUR") && toCurrency.equals("INR")) {
+                return amount * 87.46;
+            } else if (fromCurrency.equals("EUR") && toCurrency.equals("KRW")) {
+                return amount * 1314.22;
+            } else if (fromCurrency.equals("GBP") && toCurrency.equals("USD")) {
+                return amount * 1.39;
+            } else if (fromCurrency.equals("GBP") && toCurrency.equals("EUR")) {
+                return amount * 1.17;
+            } else if (fromCurrency.equals("GBP") && toCurrency.equals("JPY")) {
+                return amount * 153.40;
+            } else if (fromCurrency.equals("GBP") && toCurrency.equals("PHP")) {
+                return amount * 69.29;
+            } else if (fromCurrency.equals("GBP") && toCurrency.equals("AED")) {
+                return amount * 5.00;
+            } else if (fromCurrency.equals("GBP") && toCurrency.equals("INR")) {
+                return amount * 102.38;
+            } else if (fromCurrency.equals("GBP") && toCurrency.equals("KRW")) {
+                return amount * 1537.82;
+            } else if (fromCurrency.equals("JPY") && toCurrency.equals("USD")) {
+                return amount * 0.0091;
+            } else if (fromCurrency.equals("JPY") && toCurrency.equals("EUR")) {
+                return amount * 0.0076;
+            } else if (fromCurrency.equals("JPY") && toCurrency.equals("GBP")) {
+                return amount * 0.0065;
+            } else if (fromCurrency.equals("JPY") && toCurrency.equals("PHP")) {
+                return amount * 0.4664;
+            } else if (fromCurrency.equals("JPY") && toCurrency.equals("AED")) {
+                return amount * 0.0336;
+            } else if (fromCurrency.equals("JPY") && toCurrency.equals("INR")) {
+                return amount * 0.6883;
+            } else if (fromCurrency.equals("JPY") && toCurrency.equals("KRW")) {
+                return amount * 10.3445;
+            } else if (fromCurrency.equals("PHP") && toCurrency.equals("USD")) {
+                return amount * 0.0198;
+            } else if (fromCurrency.equals("PHP") && toCurrency.equals("EUR")) {
+                return amount * 0.0169;
+            } else if (fromCurrency.equals("PHP") && toCurrency.equals("GBP")) {
+                return amount * 0.0144;
+            } else if (fromCurrency.equals("PHP") && toCurrency.equals("JPY")) {
+                return amount * 2.1439;
+            } else if (fromCurrency.equals("PHP") && toCurrency.equals("AED")) {
+                return amount * 0.1541;
+            } else if (fromCurrency.equals("PHP") && toCurrency.equals("INR")) {
+                return amount * 3.1657;
+            } else if (fromCurrency.equals("PHP") && toCurrency.equals("KRW")) {
+                return amount * 47.5836;
+            } else if (fromCurrency.equals("AED") && toCurrency.equals("USD")) {
+                return amount * 0.27;
+            } else if (fromCurrency.equals("AED") && toCurrency.equals("EUR")) {
+                return amount * 0.23;
+            } else if (fromCurrency.equals("AED") && toCurrency.equals("GBP")) {
+                return amount * 0.20;
+            } else if (fromCurrency.equals("AED") && toCurrency.equals("JPY")) {
+                return amount * 29.77;
+            } else if (fromCurrency.equals("AED") && toCurrency.equals("PHP")) {
+                return amount * 6.49;
+            } else if (fromCurrency.equals("AED") && toCurrency.equals("INR")) {
+                return amount * 20.21;
+            } else if (fromCurrency.equals("AED") && toCurrency.equals("KRW")) {
+                return amount * 303.50;
+            } else if (fromCurrency.equals("INR") && toCurrency.equals("USD")) {
+                return amount * 0.013;
+            } else if (fromCurrency.equals("INR") && toCurrency.equals("EUR")) {
+                return amount * 0.011;
+            } else if (fromCurrency.equals("INR") && toCurrency.equals("GBP")) {
+                return amount * 0.0098;
+            } else if (fromCurrency.equals("INR") && toCurrency.equals("JPY")) {
+                return amount * 1.47;
+            } else if (fromCurrency.equals("INR") && toCurrency.equals("PHP")) {
+                return amount * 0.32;
+            } else if (fromCurrency.equals("INR") && toCurrency.equals("AED")) {
+                return amount * 0.049;
+            } else if (fromCurrency.equals("INR") && toCurrency.equals("KRW")) {
+                return amount * 15.02;
+            } else if (fromCurrency.equals("KRW") && toCurrency.equals("USD")) {
+                return amount * 0.00088;
+            } else if (fromCurrency.equals("KRW") && toCurrency.equals("EUR")) {
+                return amount * 0.00076;
+            } else if (fromCurrency.equals("KRW") && toCurrency.equals("GBP")) {
+                return amount * 0.00065;
+            } else if (fromCurrency.equals("KRW") && toCurrency.equals("JPY")) {
+                return amount * 0.097;
+            } else if (fromCurrency.equals("KRW") && toCurrency.equals("PHP")) {
+                return amount * 0.021;
+            } else if (fromCurrency.equals("KRW") && toCurrency.equals("AED")) {
+                return amount * 0.0033;
+            } else if (fromCurrency.equals("KRW") && toCurrency.equals("INR")) {
+                return amount * 0.067;
+            }
+            return amount; // If currencies are the same, return the original amount
+        }
+
+
+    
+
+    }
+}

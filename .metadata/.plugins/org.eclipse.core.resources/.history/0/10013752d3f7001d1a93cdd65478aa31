@@ -1,0 +1,149 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CurrencyCalculatorGUI {
+    private JFrame frame;
+    private JComboBox<String> fromComboBox;
+    private JComboBox<String> toComboBox;
+    private JTextField amountField;
+    private JLabel resultLabel;
+
+    public void createAndShowGUI() {
+        // Create the frame
+        frame = new JFrame("Currency Calculator");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new FlowLayout());
+
+        // Create the currency selection panels
+        JPanel fromPanel = createCurrencySelectionPanel("From: ", fromComboBox = new JComboBox<>());
+        JPanel toPanel = createCurrencySelectionPanel("To: ", toComboBox = new JComboBox<>());
+
+        // Create the amount input panel
+        JPanel amountPanel = new JPanel(new FlowLayout());
+        amountPanel.add(new JLabel("Amount: "));
+        amountField = new JTextField(10);
+        amountPanel.add(amountField);
+
+        // Create the result panel
+        JPanel resultPanel = new JPanel(new FlowLayout());
+        resultLabel = new JLabel();
+        resultPanel.add(new JLabel("Result: "));
+        resultPanel.add(resultLabel);
+
+        // Create the convert button
+        JButton convertButton = new JButton("Convert");
+        convertButton.addActionListener(new ConvertButtonListener());
+
+        // Add all components to the frame
+        frame.getContentPane().add(fromPanel);
+        frame.getContentPane().add(toPanel);
+        frame.getContentPane().add(amountPanel);
+        frame.getContentPane().add(convertButton);
+        frame.getContentPane().add(resultPanel);
+
+        // Show the frame
+        frame.setVisible(true);
+    }
+
+    private JPanel createCurrencySelectionPanel(String label, JComboBox<String> comboBox) {
+        JPanel panel = new JPanel(new FlowLayout());
+        panel.add(new JLabel(label));
+        panel.add(comboBox);
+        comboBox.addItem("USD");
+        comboBox.addItem("EUR");
+        comboBox.addItem("GBP");
+        comboBox.addItem("JPY");
+        comboBox.addItem("PHP");
+        comboBox.addItem("INR");
+        comboBox.addItem("AED");
+        comboBox.addItem("KRW");
+        
+        
+        return panel;
+    }
+
+    private class ConvertButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Get selected currencies and amount
+            String fromCurrency = (String) fromComboBox.getSelectedItem();
+            String toCurrency = (String) toComboBox.getSelectedItem();
+            String amountText = amountField.getText();
+
+            // Validate the amount input
+            if (amountText.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Please enter an amount.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            double amount;
+            try {
+                amount = Double.parseDouble(amountText);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(frame, "Invalid amount format. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Perform the conversion
+            double result = convertCurrency(fromCurrency, toCurrency, amount);
+
+            // Update the result label
+            resultLabel.setText(String.format("%.2f %s", result, toCurrency));
+        }
+
+        private double convertCurrency(String fromCurrency, String toCurrency, double amount) {
+            // Perform the currency conversion logic here
+            // You'll need to implement your own conversion rates or use an API
+            // This is just a placeholder implementation
+
+            // Conversion rates as of May 21, 2023
+            double usdToEur = 0.92;
+            double usdToGbp = 0.80;
+            double usdToJpy = 137.96;
+            double usdToPhp = 55.65;
+            double usdToInr = 82.91;
+            double usdToAed = 3.67;
+            double usdToKrw = 1,325.20 ;
+
+            if (fromCurrency.equals("USD") && toCurrency.equals("EUR")) {
+                return amount * usdToEur;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("GBP")) {
+                return amount * usdToGbp;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("JPY")) {
+                return amount * usdToJpy;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("PHP")) {
+                return amount * usdToPhp;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("INR")) {
+                return amount * usdToInr;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("AED")) {
+                return amount * usdToAed;
+            } else if (fromCurrency.equals("USD") && toCurrency.equals("KRW")) {
+                return amount * usdToKrw;
+            } else if (fromCurrency.equals("EUR") && toCurrency.equals("USD")) {
+                return amount / usdToEur;
+            } else if (fromCurrency.equals("GBP") && toCurrency.equals("USD")) {
+                return amount / usdToGbp;
+            } else if (fromCurrency.equals("JPY") && toCurrency.equals("USD")) {
+                return amount / usdToJpy;
+            } else if (fromCurrency.equals("PHP") && toCurrency.equals("USD")) {
+                return amount / usdToPhp;
+            } else if (fromCurrency.equals("INR") && toCurrency.equals("USD")) {
+                return amount / usdToInr;
+            } else if (fromCurrency.equals("AED") && toCurrency.equals("USD")) {
+                return amount / usdToAed;
+            } else if (fromCurrency.equals("KRW") && toCurrency.equals("USD")) {
+                return amount / usdToKrw;
+            }
+
+            return amount; // If currencies are the same, return the original amount
+        }
+
+
+
+    
+
+    }
+}

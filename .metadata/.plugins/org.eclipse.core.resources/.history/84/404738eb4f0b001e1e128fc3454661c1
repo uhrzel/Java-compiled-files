@@ -1,0 +1,226 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLayeredPane;
+import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
+import java.awt.CardLayout;
+import javax.swing.JTextField;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+
+
+public class Rosecalcu {
+
+    private JFrame frame;
+    private JLayeredPane layeredPane;
+    private JTextField txtnum1;
+    private JTextField txtnum2;
+    private JTextField txttot1;
+    private JTextField txttot2;
+    private JTextField txtnum4;
+    private JTextField txtnum3;
+    private JTextField txtavg;
+    private JTextField txtre;
+    private JTextField txtn1;
+    private JTextField txtn2;
+    private JTextField txtn3;
+    private JTextField txtn4;
+    private JTextField txtn5;
+    private JTextField txtn6;
+    private JTextField txtavg2;
+    private JTextField txtre2;
+    private JTextField txtf1;
+    private JTextField txtf2;
+    private JTextField txtf3;
+    private JTextField txtf4;
+    private JTextField txtf5;
+    private JTextField txtf6;
+    private JTextField txtavg3;
+    private JTextField txtre3;
+    private JTextField txtffg1;
+    private JTextField txtffg2;
+    private JTextField txtffg3;
+    private JTextField txtavg4;
+    private JTextField txtre4;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Rosecalcu window = new Rosecalcu();
+                    window.getFrame().setSize(500, 600); // Set the frame size to 500x600
+                    window.getFrame().setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the application.
+     */
+    public Rosecalcu() {
+        initialize();
+    }
+
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() {
+        setFrame(new JFrame());
+        getFrame().getContentPane().setBackground(Color.PINK);
+        getFrame().setBounds(100, 100, 540, 490);
+        getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getFrame().getContentPane().setLayout(null);
+
+        layeredPane = new JLayeredPane();
+        layeredPane.setBounds(240, 33, 255, 375);
+        getFrame().getContentPane().add(layeredPane);
+        layeredPane.setLayout(new CardLayout(0, 0));
+
+        JPanel home = new JPanel();
+        home.setForeground(new Color(0, 0, 0));
+        home.setBorder(new EmptyBorder(0, 0, 0, 0));
+        home.setBackground(Color.DARK_GRAY);
+        layeredPane.add(home, "name_427333716259600");
+        home.setLayout(null);
+
+        JLabel lblNewLabel_8 = new JLabel("Grade Calculator");
+        lblNewLabel_8.setForeground(new Color(255, 255, 255));
+        lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 15));
+        lblNewLabel_8.setBounds(67, 116, 141, 112);
+        home.add(lblNewLabel_8);
+
+        JPanel panel1 = new JPanel();
+        panel1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+        panel1.setBackground(Color.WHITE);
+        layeredPane.add(panel1, "name_427334391909500");
+        panel1.setLayout(null);
+
+        JLabel lblNewLabel = new JLabel("Number 1:");
+        lblNewLabel.setBounds(20, 33, 80, 14);
+        panel1.add(lblNewLabel);
+
+        txtnum1 = new JTextField();
+        txtnum1.setBounds(120, 30, 86, 20);
+        panel1.add(txtnum1);
+        txtnum1.setColumns(10);
+
+        JLabel lblNewLabel_1 = new JLabel("Number 2:");
+        lblNewLabel_1.setBounds(20, 68, 80, 14);
+        panel1.add(lblNewLabel_1);
+
+        txtnum2 = new JTextField();
+        txtnum2.setBounds(120, 65, 86, 20);
+        panel1.add(txtnum2);
+        txtnum2.setColumns(10);
+
+        JButton btnNewButton = new JButton("Calculate");
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int num1 = Integer.parseInt(txtnum1.getText());
+                int num2 = Integer.parseInt(txtnum2.getText());
+
+                int total1 = num1 + num2;
+                int total2 = num1 - num2;
+
+                txttot1.setText(String.valueOf(total1));
+                txttot2.setText(String.valueOf(total2));
+
+                CardLayout cardLayout = (CardLayout) layeredPane.getLayout();
+                cardLayout.next(layeredPane);
+            }
+        });
+        btnNewButton.setBounds(95, 107, 89, 23);
+        panel1.add(btnNewButton);
+
+        txttot1 = new JTextField();
+        txttot1.setBounds(120, 170, 86, 20);
+        panel1.add(txttot1);
+        txttot1.setColumns(10);
+
+        txttot2 = new JTextField();
+        txttot2.setBounds(120, 205, 86, 20);
+        panel1.add(txttot2);
+        txttot2.setColumns(10);
+
+        JLabel lblNewLabel_2 = new JLabel("Total 1:");
+        lblNewLabel_2.setBounds(20, 173, 46, 14);
+        panel1.add(lblNewLabel_2);
+
+        JLabel lblNewLabel_3 = new JLabel("Total 2:");
+        lblNewLabel_3.setBounds(20, 208, 46, 14);
+        panel1.add(lblNewLabel_3);
+
+        JPanel panel2 = new JPanel();
+        panel2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+        panel2.setBackground(Color.WHITE);
+        layeredPane.add(panel2, "name_427335215081300");
+        panel2.setLayout(null);
+
+        JLabel lblNewLabel_4 = new JLabel("Number 3:");
+        lblNewLabel_4.setBounds(20, 33, 80, 14);
+        panel2.add(lblNewLabel_4);
+
+        txtnum3 = new JTextField();
+        txtnum3.setBounds(120, 30, 86, 20);
+        panel2.add(txtnum3);
+        txtnum3.setColumns(10);
+
+        JLabel lblNewLabel_5 = new JLabel("Number 4:");
+        lblNewLabel_5.setBounds(20, 68, 80, 14);
+        panel2.add(lblNewLabel_5);
+
+        txtnum4 = new JTextField();
+        txtnum4.setBounds(120, 65, 86, 20);
+        panel2.add(txtnum4);
+        txtnum4.setColumns(10);
+
+        JButton btnNewButton_1 = new JButton("Calculate");
+        btnNewButton_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int num3 = Integer.parseInt(txtnum3.getText());
+                int num4 = Integer.parseInt(txtnum4.getText());
+
+                int total3 = num3 * num4;
+                int total4 = num3 / num4;
+
+                txttot3.setText(String.valueOf(total3));
+                txttot4.setText(String.valueOf(total4));
+
+                CardLayout cardLayout = (CardLayout) layeredPane.getLayout();
+                cardLayout.next(layeredPane);
+            }
+        });
+        btnNewButton_1.setBounds(95, 107, 89, 23);
+        panel2.add(btnNewButton_1);
+
+        txttot3 = new JTextField();
+        txttot3.setBounds(120, 170, 86, 20);
+        panel2.add(txttot3);
+        txttot3.setColumns(10);
+
+        txttot4 = new JTextField();
+        txttot4.setBounds(120, 205, 86, 20);
+        panel2.add(txttot4);
+        txttot4.setColumns(10);
+
+        JLabel lblNewLabel_6 = new JLabel("Total 3:");
+        lblNewLabel_6.setBounds(20, 173, 46, 14);
+        panel2.add(lblNewLabel_6);
+
+        JLabel lblNewLabel_7 = new JLabel("Total 4:");
+        lblNewLabel_7.setBounds(20, 208, 46, 14);
+        panel2.add(lblNewLabel_7);
+    }
+}

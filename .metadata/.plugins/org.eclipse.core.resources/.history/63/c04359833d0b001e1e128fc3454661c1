@@ -1,0 +1,81 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CurrencyCalculatorPanel extends JPanel {
+    private JComboBox<String> fromComboBox;
+    private JComboBox<String> toComboBox;
+    private JTextField amountField;
+    private JLabel resultLabel;
+
+    public CurrencyCalculatorPanel() {
+        setLayout(new FlowLayout());
+
+        JPanel fromPanel = createCurrencySelectionPanel("From: ", fromComboBox = new JComboBox<>());
+        JPanel toPanel = createCurrencySelectionPanel("To: ", toComboBox = new JComboBox<>());
+
+        JPanel amountPanel = new JPanel(new FlowLayout());
+        amountPanel.add(new JLabel("Amount: "));
+        amountField = new JTextField(10);
+        amountPanel.add(amountField);
+
+        JPanel resultPanel = new JPanel(new FlowLayout());
+        resultLabel = new JLabel();
+        resultPanel.add(new JLabel("Result: "));
+        resultPanel.add(resultLabel);
+
+        JButton convertButton = new JButton("Convert");
+        convertButton.addActionListener(new ConvertButtonListener());
+
+        add(fromPanel);
+        add(toPanel);
+        add(amountPanel);
+        add(convertButton);
+        add(resultPanel);
+    }
+
+    private JPanel createCurrencySelectionPanel(String label, JComboBox<String> comboBox) {
+        JPanel panel = new JPanel(new FlowLayout());
+        panel.add(new JLabel(label));
+        panel.add(comboBox);
+        comboBox.addItem("USD");
+        comboBox.addItem("EUR");
+        comboBox.addItem("GBP");
+        comboBox.addItem("JPY");
+        comboBox.addItem("PHP");
+        comboBox.addItem("INR");
+        comboBox.addItem("AED");
+        comboBox.addItem("KRW");
+        return panel;
+    }
+
+    private class ConvertButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String fromCurrency = (String) fromComboBox.getSelectedItem();
+            String toCurrency = (String) toComboBox.getSelectedItem();
+            String amountText = amountField.getText();
+
+            if (amountText.isEmpty()) {
+                JOptionPane.showMessageDialog(getParent(), "Please enter an amount.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            double amount;
+            try {
+                amount = Double.parseDouble(amountText);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(getParent(), "Invalid amount format. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            double result = convertCurrency(fromCurrency, toCurrency, amount);
+            resultLabel.setText(String.format("%.2f %s", result, toCurrency));
+        }
+
+        private double convertCurrency(String fromCurrency, String toCurrency, double amount) {
+            // Currency conversion logic (same as in your original code)
+        }
+    }
+}

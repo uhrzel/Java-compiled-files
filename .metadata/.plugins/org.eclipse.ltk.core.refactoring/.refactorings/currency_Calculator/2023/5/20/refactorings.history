@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;currency_Calculator&apos;&#x0D;&#x0A;- Original project: &apos;currency_Calculator&apos;&#x0D;&#x0A;- Original element: &apos;currency_Calculator/src/java.awt.event&apos;" description="Delete element" element1="/src&lt;java.awt.event" element2="/src&lt;java.awt" element3="/src&lt;java" elements="3" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1684588174673" subPackages="false" version="1.0"/>
+</session>
