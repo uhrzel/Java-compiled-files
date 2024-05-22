@@ -6,6 +6,9 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\User\Downloads\FlappyBird-master"/>
+			<item value="C:\Users\User\Downloads\Flappy Bird"/>
+			<item value="C:\Users\User\Downloads\FlappyBird by Leon"/>
 			<item value="C:\Users\User\Documents\rosegradecalcu"/>
 			<item value="C:\Users\User\Documents\roseper"/>
 			<item value="C:\Users\User\eclipse-workspace\currency_Calculator"/>
